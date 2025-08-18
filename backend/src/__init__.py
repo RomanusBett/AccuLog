@@ -18,3 +18,21 @@ login_manager.login_message_category = 'danger'
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+
+from src.views.services.register import register_bp
+from src.views.users.loginUser import login_bp
+from src.views.users.updateUser import update_user_bp
+from src.views.users.logout import logout_bp
+from src.views.services.vehicle import addCar_bp
+from src.views.services.thisService import this_service_bp
+from src.views.services.clear_vehicle import clear_vehicle_bp
+
+
+app.register_blueprint(register_bp)
+app.register_blueprint(login_bp)
+app.register_blueprint(logout_bp)
+app.register_blueprint(addCar_bp)
+app.register_blueprint(this_service_bp)
+app.register_blueprint(update_user_bp)
+app.register_blueprint(clear_vehicle_bp)
