@@ -1,13 +1,14 @@
-import { Component, input } from '@angular/core';
+import { Component, input,  } from '@angular/core';
 
 @Component({
   selector: 'app-f-input',
-  imports: [],
   templateUrl: './f-input.component.html',
-  styles: ``
+  providers: [],
 })
-export class FInputComponent {
+
+export class FInputComponent{
   label = input<string>();
   placeholder = input<string>();
   type = input<string>();
+  fCName = input<string>();
 }
