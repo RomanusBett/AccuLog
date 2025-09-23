@@ -5,10 +5,16 @@
     linkText="Already have an account? "
     linkUrl="/login"
     linkActionTxt="Login"
->
-    <app-f-input type="text" label="name" placeholder="Enter your name"></app-f-input>
-    <app-f-input type="email" label="Email" placeholder="Enter your email"></app-f-input>
-    <app-f-input type="password" label="Password" placeholder="Enter your password"></app-f-input>
-    <app-f-input type="password" label="confirm_password" placeholder="Confirm your password"></app-f-input>
+    [form]="profileForm"
+>   
+    @if(profileForm.errors?.['passwordMismatch']){
+        <div class="text-red-500 text-sm mt-1">
+            Passwords do not match.
+        </div>
+    }
+    <app-f-input type="text" label="name" fCName="name" placeholder="Enter your name"></app-f-input>
+    <app-f-input type="email" label="Email" fCName="email" placeholder="Enter your email"></app-f-input>
+    <app-f-input type="password" label="Password" fCName="password" placeholder="Enter your password"></app-f-input>
+    <app-f-input type="password" label="confirm_password" fCName="confirmPassword" placeholder="Confirm your password"></app-f-input>
 </app-auth-form>
 
