@@ -11,11 +11,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  register(credentials:any):Observable<any>{
-    return this.http.post(`${this.apiUrl}/register`, credentials);
+  register(credentials: any): Observable<any> {    
+    return this.http.post(`${this.apiUrl}/register`, credentials)
   }
 
-  login(credentials: {email:string; password:string}): Observable<any> {
+  login(credentials: {email:string; password:string}): Observable<any> {    
     return this.http.post(`${this.apiUrl}/login`, credentials)
   }
 

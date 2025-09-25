@@ -12,7 +12,7 @@
                     <h3 class="capitalize">{{title()}}</h3>
                 </div>
                 <p class="text-sm text-gray-500">{{subtitle()}}</p>
-                <form [formGroup]="form()" (ngSubmit)="handleSubmit()">
+                <form [formGroup]="form()" (ngSubmit)="thisSubmit()">
                     <ng-content></ng-content>
                     <app-button [content]="btnText()"></app-button>
                 </form>

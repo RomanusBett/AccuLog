@@ -3,12 +3,14 @@ from flask_login import LoginManager
 from src.extensions import db, bcrypt, migrate, app
 from .views.models import User
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 
 app.config.from_object(config('APP_SETTINGS'))
 db.init_app(app)
 bcrypt.init_app(app)
 migrate.init_app(app, db)
-CORS(app, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(app, origins=['http://localhost:4200'], supports_credentials=True)
+jwt = JWTManager(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
