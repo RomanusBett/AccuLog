@@ -1,9 +1,28 @@
 <div class="flex flex-col text-sm mt-3">
     <label class="mb-1">{{label()}}</label>
-    <input 
-        [type]="type()" 
-        class="bg-gray-200 text-gray-500 rounded-md p-1 pl-2 font-light" 
-        [placeholder]="placeholder()"
-        formControlName="fCName()"
-        >
+    <div class="flex items-center justify-center w-[100%]"
+        [class.gap-2]="type()=== 'password' || type() === 'confirmPassword'" 
+>
+        <input [type]="showPassword ? 'text': type()" class="bg-gray-200 text-gray-500 rounded-md p-1 pl-2 font-light"
+            [class.w-full]="type()!== 'password' && type() !== 'confirmPassword'"
+            [class.w-[90%]]="type()=== 'password' || type() === 'confirmPassword'" 
+            [placeholder]="placeholder()"
+            [formControl]="fCName()">
+
+        @if(type()==="password"|| type()==="confirmPassword"){
+        <button type="button" (click)="togglePassword()" class="relative text-gray-700">
+            @if(showPassword){
+            <div>
+                <lucide-angular [img]="Eye" class="w-5 h-5"></lucide-angular>
+            </div>
+            }
+            @else {
+            <div>
+                <lucide-angular [img]="EyeClosed" class="w-5 h-5"></lucide-angular>
+            </div>
+            }
+        </button>
+        }
+    </div>
+
 </div>

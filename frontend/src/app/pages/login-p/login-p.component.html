@@ -5,10 +5,10 @@
     linkText="Don't have an account? "
     linkUrl="/register"
     linkActionTxt="Register"
-    (formSubmit)="onSubmit($event)"
+    (formSubmit)="handleSubmit($event)"
     [form]="profileForm"
 
 >
-    <app-f-input type="email" label="Email" placeholder="Enter your email" fCName="email" ></app-f-input>
-    <app-f-input type="password" label="Password" placeholder="Enter your password" fCName="password"></app-f-input>
+    <app-f-input type="email" label="Email" placeholder="Enter your email" [fCName]="profileForm.get('email')" ></app-f-input>
+    <app-f-input type="password" label="Password" placeholder="Enter your password" [fCName]="profileForm.get('password')"></app-f-input>
 </app-auth-form>

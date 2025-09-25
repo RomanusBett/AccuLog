@@ -1,14 +1,25 @@
-import { Component, input,  } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LucideAngularModule, Eye, EyeClosed } from 'lucide-angular';
 
 @Component({
   selector: 'app-f-input',
+  standalone: true,
+  imports: [ReactiveFormsModule, LucideAngularModule],  
   templateUrl: './f-input.component.html',
-  providers: [],
 })
+export class FInputComponent {
+  readonly Eye = Eye;
+  readonly EyeClosed = EyeClosed;
 
-export class FInputComponent{
   label = input<string>();
   placeholder = input<string>();
   type = input<string>();
-  fCName = input<string>();
+  fCName = input<any>();
+
+  showPassword = false;
+
+  togglePassword(){
+    this.showPassword = !this.showPassword;
+  }
 }

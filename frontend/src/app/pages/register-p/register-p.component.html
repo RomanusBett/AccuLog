@@ -6,15 +6,16 @@
     linkUrl="/login"
     linkActionTxt="Login"
     [form]="profileForm"
+    (formSubmit)="handleSubmit($event)"
 >   
-    @if(profileForm.errors?.['passwordMismatch']){
+    @if(errorMessage){
         <div class="text-red-500 text-sm mt-1">
-            Passwords do not match.
+            {{errorMessage}}
         </div>
     }
-    <app-f-input type="text" label="name" fCName="name" placeholder="Enter your name"></app-f-input>
-    <app-f-input type="email" label="Email" fCName="email" placeholder="Enter your email"></app-f-input>
-    <app-f-input type="password" label="Password" fCName="password" placeholder="Enter your password"></app-f-input>
-    <app-f-input type="password" label="confirm_password" fCName="confirmPassword" placeholder="Confirm your password"></app-f-input>
-</app-auth-form>
 
+    <app-f-input type="text" label="name" [fCName]="profileForm.get('name')" placeholder="Enter your name"></app-f-input>
+    <app-f-input type="email" label="Email" [fCName]="profileForm.get('email')" placeholder="Enter your email"></app-f-input>
+    <app-f-input type="password" label="Password" [fCName]="profileForm.get('password')" placeholder="Enter your password"></app-f-input>
+    <app-f-input type="password" label="confirm_password" [fCName]="profileForm.get('confirmPassword')"  placeholder="Confirm your password"></app-f-input>
+</app-auth-form>

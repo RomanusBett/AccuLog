@@ -19,12 +19,11 @@ export class LoginPComponent {
     email: new FormControl(''),
     password: new FormControl('')
   })
-
-  onSubmit(credentials:{email:string; password: string}){
+  
+  handleSubmit(credentials:{email:string; password: string}){    
     this.apiService.login(credentials).subscribe({
       next: (response) => {
         console.log("login successful", response)
-        
       },
       error: (error)=>{
         console.error('login failed', error);
