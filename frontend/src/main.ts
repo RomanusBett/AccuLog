@@ -5,6 +5,7 @@ import { provideRouter, Routes } from '@angular/router';
 import { LoginPComponent } from './app/pages/login-p/login-p.component';
 import { RegisterPComponent } from './app/pages/register-p/register-p.component';
 import { ClientPComponent } from './app/pages/client-p/client-p.component';
+import { AdminComponent } from './app/pages/admin/admin.component';
 
 export const routes: Routes = [
   {
@@ -23,9 +24,13 @@ export const routes: Routes = [
     component: ClientPComponent,
   },
   {
+    path:'site-admin',
+    title: 'Admin Page',
+    component: AdminComponent,
+  },
+  {
     path: '**', redirectTo: 'login'
   }
-
 ]
 
 

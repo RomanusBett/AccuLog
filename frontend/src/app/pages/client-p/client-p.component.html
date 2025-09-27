@@ -1,1 +1,19 @@
-<p>client-p works!</p>
+<app-navbar></app-navbar>
+<div class="width-full flex justify-center pt-2 pb-2 bg-gray-50">
+    <div class="mx-auto flex justify-between w-[80%] mt-8">
+        @for(card of infoCards; track card.cardTitle){
+        <app-info-cards [title]="card.cardTitle" [figure]="card.cardFigures" [label]="card.cardLabels">
+        </app-info-cards>
+        }
+    </div>
+</div>
+<div class="width-full flex justify-center pt-2 pb-2 bg-gray-50">
+    <div class="mx-auto flex justify-between w-[80%] mt-8">
+        <div class="flex bg-gray-200 rounded-[10px] gap-2 text-xs text-gray-600 p-1">
+            @for(n of statesToBeToggled; track n){
+            <app-mini-nav [navText]="n" [isActive]="state===n" (clicked)="setState(n)">
+            </app-mini-nav>
+            }
+        </div>
+    </div>
+</div>

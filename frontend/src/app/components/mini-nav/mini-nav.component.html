@@ -1,0 +1,3 @@
+    <button class="rounded-[8px] p-[3px]" (click)="clicked.emit()" [class.bg-white]="isActive()" [class.bg-gray-200]="!isActive()">
+        {{navText()}}
+    </button>
