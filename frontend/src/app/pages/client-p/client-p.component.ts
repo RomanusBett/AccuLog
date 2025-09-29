@@ -5,10 +5,11 @@ import { MiniNavComponent } from '../../components/mini-nav/mini-nav.component';
 import { VehicleCardsComponent } from '../../components/vehicle-cards/vehicle-cards.component';
 import { ServiceCardsComponent } from '../../components/service-cards/service-cards.component';
 import { Car, DollarSign, Calendar } from 'lucide-angular';
+import { CreateButtonComponent } from '../../components/create-button/create-button.component';
 
 @Component({
   selector: 'app-client-p',
-  imports: [NavbarComponent, InfoCardsComponent, MiniNavComponent, VehicleCardsComponent, ServiceCardsComponent],
+  imports: [NavbarComponent, InfoCardsComponent, MiniNavComponent, VehicleCardsComponent, ServiceCardsComponent, CreateButtonComponent],
   templateUrl: './client-p.component.html',
   styles: ``
 })

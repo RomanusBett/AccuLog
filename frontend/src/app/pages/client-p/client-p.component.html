@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="width-full flex justify-center pt-2 pb-2 bg-gray-50">
-    <div class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between w-[80%] mt-8 gap-8">
+    <div class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between w-[80%] mt-8 gap-8">
         @for(card of infoCards; track card.cardTitle){
         <app-info-cards [title]="card.cardTitle" [figure]="card.cardFigures" [label]="card.cardLabels" [icon]="card.cardIcon">
         </app-info-cards>
@@ -16,15 +16,14 @@
             }
         </div>
 
-        @if(state === 'My Cars'){
+        @if(state === statesToBeToggled[0]){
         <div class="mt-5 flex justify-between">
             <div>
                 <h2 class="capitalize">My vehicles</h2>
                 <p class="text-gray-600 text-sm">Manage your registered vehicles</p>
             </div>
-            <button class="bg-black text-white p-2 rounded text-xs h-fit hover:cursor-pointer hover:bg-gray-800">
-                Add Vehicle
-            </button>
+            <app-create-button text="Add Vehicle">
+            </app-create-button>
         </div>
         <div class="mt-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3  gap-2">
             @for(car of carCards; track car.id){
@@ -35,7 +34,7 @@
             }
         </div>
         }
-        @if(state === 'Service History'){
+        @if(state === statesToBeToggled[1]){
         <div class="mt-5 flex justify-between">
             <div>
                 <h2 class="capitalize">Service History</h2>

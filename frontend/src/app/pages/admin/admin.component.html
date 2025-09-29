@@ -2,7 +2,8 @@
 <div class="width-full flex justify-center pt-2 pb-2 bg-gray-50">
     <div class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between w-[80%] mt-8 gap-8">
         @for(card of adminCards; track card.cardTitle){
-        <app-info-cards [title]="card.cardTitle" [figure]="card.cardFigures" [label]="card.cardLabels" [icon]="card.cardIcon">
+        <app-info-cards [title]="card.cardTitle" [figure]="card.cardFigures" [label]="card.cardLabels"
+            [icon]="card.cardIcon">
         </app-info-cards>
         }
     </div>
@@ -15,5 +16,103 @@
             </app-mini-nav>
             }
         </div>
+        @if(state === statesToBeToggled[0]){
+        <div class="mt-5 flex justify-between">
+            <div>
+                <h2 class="capitalize">Service queue management</h2>
+                <p class="text-gray-600 text-sm">Manage your ongoing and pending car wash services</p>
+            </div>
+            <app-create-button text="Add Service"></app-create-button>
+        </div>
+        <div class="bg-white border-1 border-gray-300 rounded p-3 mt-5">
+            <div>
+                <h2 class="capitalize text-md">Add new service</h2>
+                <p class="text-sm text-gray-600">Add a car to the service queue</p>
+            </div>
+            <form class="mt-2">
+                <div class="flex flex-col mb-3">
+                    <label class="text-sm">Client username or Plate</label>
+                    <input class="text-xs text-gray-600 bg-gray-100 rounded p-2" type="text"
+                        placeholder="Enter plates or customer name">
+                </div>
+                <app-create-button text="Search"></app-create-button>
+                <app-app-dropdown label="Confirm vehicle" [options]="[
+                { label: 'Volvo', value: 'volvo' },
+                { label: 'Saab', value: 'saab' },
+                { label: 'Mercedes', value: 'mercedes' },
+                { label: 'Audi', value: 'audi' }
+                ]" (selectedChange)="onVehicleChange($event)"></app-app-dropdown>
+                <app-app-dropdown label="Select service" [options]="[
+                { label: 'Premium wash', value: 'premium' },
+                { label: 'Interior clean', value: 'interior' },
+                { label: 'Full detail', value: 'detail' }
+                ]" (selectedChange)="onServiceChange($event)">
+                </app-app-dropdown>
+                <app-create-button text="Submit"></app-create-button>
+            </form>
+
+        </div>
+        <div class="flex mt-2 text-sm items-center gap-2">
+            <lucide-angular class="h-4 w-4 text-blue-600" [img]="CircleAlert"></lucide-angular>
+            <p class="capitalize">in progress(1)</p>
+        </div>
+        <div class="mt-5 grid grid-cols-1  gap-2">
+            @for(car of queuedCars; track car.id){
+            <app-progress-cards [serviceType]="car.type" [year]='car.year' [model]='car.carModel' [plate]='car.plate'
+                [dueAmount]='car.dueAmount' [customer]='car.customer' [status]='car.status' [id]='car.id'>
+
+            </app-progress-cards>
+            }
+        </div>
+        }
+        @if(state === statesToBeToggled[1]){
+        <div class="mt-5 flex justify-between">
+            <div>
+                <h2 class="capitalize">Today's Overview</h2>
+                <p class="text-gray-600 text-sm">{{day}}/{{month}}/{{year}}</p>
+            </div>
+            <app-create-button text="Add Service"></app-create-button>
+        </div>
+        <div class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
+            @for(o of overviews; track o.title){
+            <app-summary-cards [cardTitle]='o.title' [icon]='o.icon' [stats]='o.stats'></app-summary-cards>
+            }
+        </div>
+        <div>
+            <div class="bg-white border-1 border-gray-300 mt-5 rounded p-5">
+                <h2 class="capitalize mb-2">completed services today</h2>
+                @for(c of queuedCars; track c.id){
+                <div class="flex justify-between bg-gray-100 rounded p-1 mb-2">
+                    <div>
+                        <h2 class="mb-1 text-sm">{{c.type}}</h2>
+                        <p class="text-xs text-gray-600">{{c.carModel}} ({{c.plate}})</p>
+                    </div>
+                    <div class="mb-3">
+                        <h2 class="text-sm mb-1">Ksh{{c.dueAmount}}</h2>
+                        <p class="text-xs text-gray-600">{{c.customer}}</p>
+                    </div>
+                </div>
+                }
+
+            </div>
+        </div>
+        }
+        @if(state === statesToBeToggled[2]){
+        <div class="mt-5 flex justify-between">
+            <div>
+                <h2 class="capitalize">All Services</h2>
+                <p class="text-gray-600 text-sm">Complete service history</p>
+            </div>
+            <app-create-button text="Add Service"></app-create-button>
+        </div>
+        <div class="mt-5">
+            @for(service of queuedCars; track service.id){
+            <app-service-cards [type]="service.type" [car]="service.carModel" [year]="service.year"
+                [license]="service.plate" [date]="service.serviceDate" [status]="service.status"
+                [price]="service.dueAmount" [id]="service.id">
+            </app-service-cards>
+            }
+        </div>
+        }
     </div>
 </div>
