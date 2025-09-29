@@ -1,0 +1,25 @@
+<div class="bg-white border-1 border-gray-300 rounded p-5">
+    <div class="flex gap-2 mb-5">
+        <lucide-angular [img]="icon()"></lucide-angular>
+        <h2>{{cardTitle()}}</h2>
+    </div>
+    <div>
+        @for(stat of stats(); track stat.label){
+        <div class="flex justify-between mb-3 text-sm">
+            <div class="flex gap-2 items-center">
+                @if(stat.label === 'Pending'){
+                    <lucide-angular class="h-4 w-4 text-orange-600" [img]="Clock"></lucide-angular>
+                }
+                @if(stat.label === 'In Progress'){
+                    <lucide-angular class="h-4 w-4 text-blue-600" [img]="CircleAlert"></lucide-angular>
+                }
+                @if(stat.label === 'Completed'){
+                    <lucide-angular class="h-4 w-4 text-green-600" [img]="CircleCheckBig"></lucide-angular>
+                }
+                <h2>{{stat.label}}:</h2>
+            </div>
+            <h2>{{stat.value}}</h2>
+        </div>
+        }
+    </div>
+</div>
