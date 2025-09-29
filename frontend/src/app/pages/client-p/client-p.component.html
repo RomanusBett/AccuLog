@@ -1,1 +1,55 @@
-<p>client-p works!</p>
+<app-navbar></app-navbar>
+<div class="width-full flex justify-center pt-2 pb-2 bg-gray-50">
+    <div class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-between w-[80%] mt-8 gap-8">
+        @for(card of infoCards; track card.cardTitle){
+        <app-info-cards [title]="card.cardTitle" [figure]="card.cardFigures" [label]="card.cardLabels" [icon]="card.cardIcon">
+        </app-info-cards>
+        }
+    </div>
+</div>
+<div class="width-full flex justify-center pt-2 pb-2 bg-gray-50">
+    <div class="mx-auto justify-between w-[80%] mt-8">
+        <div class="flex bg-gray-200 rounded-[10px] gap-2 text-xs text-gray-600 p-1 w-fit">
+            @for(n of statesToBeToggled; track n){
+            <app-mini-nav [navText]="n" [isActive]="state===n" (clicked)="setState(n)">
+            </app-mini-nav>
+            }
+        </div>
+
+        @if(state === 'My Cars'){
+        <div class="mt-5 flex justify-between">
+            <div>
+                <h2 class="capitalize">My vehicles</h2>
+                <p class="text-gray-600 text-sm">Manage your registered vehicles</p>
+            </div>
+            <button class="bg-black text-white p-2 rounded text-xs h-fit hover:cursor-pointer hover:bg-gray-800">
+                Add Vehicle
+            </button>
+        </div>
+        <div class="mt-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3  gap-2">
+            @for(car of carCards; track car.id){
+            <app-vehicle-cards [type]="car.carType" [year]="car.year" [colour]="car.colour" [license]="car.License"
+                [services]="car.services">
+
+            </app-vehicle-cards>
+            }
+        </div>
+        }
+        @if(state === 'Service History'){
+        <div class="mt-5 flex justify-between">
+            <div>
+                <h2 class="capitalize">Service History</h2>
+                <p class="text-gray-600 text-sm">View all your car wash services</p>
+            </div>
+        </div>
+        <div class="mt-5">
+            @for(service of serviceCardsInfo; track service.id){
+            <app-service-cards [type]="service.type" [car]="service.carType" [year]="service.year"
+                [license]="service.License" [date]="service.serviceDate" [status]="service.status"
+                [price]="service.price" [id]="service.id">
+            </app-service-cards>
+            }
+        </div>
+        }
+    </div>
+</div>

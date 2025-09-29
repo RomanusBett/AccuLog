@@ -1,0 +1,11 @@
+<div class="bg-white border-1 border-gray-200 p-5 rounded">
+    <div class="flex justify-between mb-5 text-md">
+        <lucide-angular class="text-blue-700" [img]="Car"></lucide-angular>
+        <P class="text-xs border-1 border-gray-300 rounded pt-[2px] pb-[2px] pl-2 pr-2">{{colour()}}</P>
+    </div>
+    <div>
+        <h2>{{year()}} {{type()}}</h2>
+        <p class="text-gray-600 text-sm">License: {{license()}}</p>
+        <p class="text-gray-600 text-xs">Services: {{services()}}</p>
+    </div>
+</div>
