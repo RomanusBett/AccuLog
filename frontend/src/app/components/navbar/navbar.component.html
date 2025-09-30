@@ -1,18 +1,16 @@
-<div>
-    <div class="width-full flex justify-center  border-b-1 border-gray-200 shadow-sm pt-2 pb-2">
-        <div class="mx-auto flex justify-between w-[80%]">
-            <div class="flex items-center">
-                <img class="h-10 w-10" src="/A_none.png" alt="Acculog logo">
-                <h2>Acculog</h2>
-            </div>
-            <div class="flex items-center text-gray-600 text-sm gap-5">
-                <p>Welcome, John Doe</p>
-                <button class="flex items-center border-2 rounded p-1 border-gray-200 gap-2 hover:cursor-pointer">
-                    <lucide-angular class="w-4 h-4" [img]="LogIn">
-                    </lucide-angular>
-                    Logout
-                </button>
-            </div>
+<div class="sticky top-0 width-full flex justify-center bg-white border-b-1 border-gray-200 shadow-sm pt-2 pb-2">
+    <div class="mx-auto flex justify-between w-[80%]">
+        <div class="flex items-center">
+            <img class="h-10 w-10" src="/A_none.png" alt="Acculog logo">
+            <h2 class="font-bold text-lg text-blue-900">Acculog</h2>
+        </div>
+        <div class="flex items-center text-gray-600 text-sm gap-5">
+            <p>Welcome, John Doe</p>
+            <button (click)="logoutUser()" class="flex items-center border-2 rounded p-1 border-gray-200 gap-2 hover:cursor-pointer">
+                <lucide-angular class="w-4 h-4" [img]="LogIn">
+                </lucide-angular>
+                Logout
+            </button>
         </div>
     </div>
 </div>

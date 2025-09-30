@@ -1,6 +1,6 @@
 <div class="bg-white border-1 border-gray-200 p-5 rounded mt-2">
     <div class="flex mb-5 items-center gap-2">
-        <lucide-angular class="h-5 w-5" [img]="status()==='completed'?Check:CircleAlert">
+        <lucide-angular class="h-5 w-5" [class.text-red-600]="status()==='In-Progress'" [class.text-green-600]="status()==='completed'" [img]="status()==='completed'?CircleCheckBig:CircleAlert">
         </lucide-angular>
         <div class="flex justify-between w-full">
             <div>

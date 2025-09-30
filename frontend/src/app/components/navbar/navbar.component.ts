@@ -9,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
   readonly LogIn = LogIn;
+
+  logoutUser(){
+    window.location.href = '/login';
+  }
 }

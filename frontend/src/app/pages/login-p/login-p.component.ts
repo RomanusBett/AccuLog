@@ -23,6 +23,7 @@ export class LoginPComponent {
   handleSubmit(credentials:{email:string; password: string}){    
     this.apiService.login(credentials).subscribe({
       next: (response) => {
+        window.location.href = '/home';
         console.log("login successful", response)
       },
       error: (error)=>{

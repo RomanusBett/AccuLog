@@ -1,54 +1,77 @@
 <app-navbar></app-navbar>
-<div class="width-full flex justify-center pt-2 pb-2 bg-gray-50">
-    <div class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between w-[80%] mt-8 gap-8">
-        @for(card of infoCards; track card.cardTitle){
-        <app-info-cards [title]="card.cardTitle" [figure]="card.cardFigures" [label]="card.cardLabels" [icon]="card.cardIcon">
-        </app-info-cards>
-        }
-    </div>
-</div>
-<div class="width-full flex justify-center pt-2 pb-2 bg-gray-50">
-    <div class="mx-auto justify-between w-[80%] mt-8">
-        <div class="flex bg-gray-200 rounded-[10px] gap-2 text-xs text-gray-600 p-1 w-fit">
-            @for(n of statesToBeToggled; track n){
-            <app-mini-nav [navText]="n" [isActive]="state===n" (clicked)="setState(n)">
-            </app-mini-nav>
-            }
-        </div>
-
-        @if(state === statesToBeToggled[0]){
-        <div class="mt-5 flex justify-between">
-            <div>
-                <h2 class="capitalize">My vehicles</h2>
-                <p class="text-gray-600 text-sm">Manage your registered vehicles</p>
-            </div>
-            <app-create-button text="Add Vehicle">
-            </app-create-button>
-        </div>
-        <div class="mt-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3  gap-2">
-            @for(car of carCards; track car.id){
-            <app-vehicle-cards [type]="car.carType" [year]="car.year" [colour]="car.colour" [license]="car.License"
-                [services]="car.services">
-
-            </app-vehicle-cards>
-            }
-        </div>
-        }
-        @if(state === statesToBeToggled[1]){
-        <div class="mt-5 flex justify-between">
-            <div>
-                <h2 class="capitalize">Service History</h2>
-                <p class="text-gray-600 text-sm">View all your car wash services</p>
+<div class="bg-gray-50 min-h-screen flex flex-col">
+    <div class="flex-1">
+        <div class="width-full flex justify-center pt-2 pb-2">
+            <div class="mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between w-[80%] mt-8 gap-8">
+                @for(card of infoCards; track card.cardTitle){
+                <app-info-cards [title]="card.cardTitle" [figure]="card.cardFigures" [label]="card.cardLabels"
+                    [icon]="card.cardIcon">
+                </app-info-cards>
+                }
             </div>
         </div>
-        <div class="mt-5">
-            @for(service of serviceCardsInfo; track service.id){
-            <app-service-cards [type]="service.type" [car]="service.carType" [year]="service.year"
-                [license]="service.License" [date]="service.serviceDate" [status]="service.status"
-                [price]="service.price" [id]="service.id">
-            </app-service-cards>
-            }
+        <div class="width-full flex justify-center mt-2 pb-2">
+            <div class="mx-auto justify-between w-[80%] mt-8 border-t border-gray-200 pt-2">
+                <div class="flex bg-blue-50 rounded-[20px] gap-2 text-xs text-gray-600 p-1 w-fit">
+                    @for(n of statesToBeToggled; track n){
+                    <app-mini-nav [navText]="n" [isActive]="state===n" (clicked)="setState(n)">
+                    </app-mini-nav>
+                    }
+                </div>
+
+                @if(state === statesToBeToggled[0]){
+                <div class="mt-5 flex justify-between">
+                    <div>
+                        <h2 class="capitalize text-blue-900 font-bold">My vehicles</h2>
+                        <p class="text-gray-600 text-sm">Manage your registered vehicles</p>
+                    </div>
+                    <app-button (btnOutput)="addCar()" [content]="!addingCar?'Add a New Vehicle':'Cancel'">
+                    </app-button>
+                </div>
+                @if(addingCar){
+                <div class="bg-white border-1 border-gray-300 rounded p-3 mt-5 mb-15">
+                    <div class="border-gray-300 border-b">
+                        <h2 class="capitalize text-md">Add new vehicle</h2>
+                        <p class="text-xs text-gray-600">Add another vehicle to your list of serviceable vehicles</p>
+                    </div>
+                    <form class="mt-2">
+                        <div class="flex flex-col mt-5 mb-5 text-sm">
+                            <app-form-input formLabel="Model" holder="Enter your car model"></app-form-input>
+                            <app-form-input formLabel="Plate" holder="Enter your car plate no"></app-form-input>
+                            <app-form-input formLabel="Colour" holder="Enter the colour of your car"></app-form-input>
+                            <app-form-input formLabel="Year" holder="Enter vehicle's production year"></app-form-input>
+                        </div>
+                        <app-button content="Submit"></app-button>
+                    </form>
+
+                </div>
+                }
+                <div class="mt-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3  gap-2">
+                    @for(car of carCards; track car.id){
+                    <app-vehicle-cards [type]="car.carType" [year]="car.year" [colour]="car.colour"
+                        [license]="car.License" [services]="car.services">
+                    </app-vehicle-cards>
+                    }
+                </div>
+                }
+                @if(state === statesToBeToggled[1]){
+                <div class="mt-5 flex justify-between">
+                    <div>
+                        <h2 class="capitalize text-blue-900 font-bold">Service History</h2>
+                        <p class="text-gray-600 text-sm">Here is a list of all the previous carwash services</p>
+                    </div>
+                </div>
+                <div class="mt-5">
+                    @for(service of serviceCardsInfo; track service.id){
+                    <app-service-cards [type]="service.type" [car]="service.carType" [year]="service.year"
+                        [license]="service.License" [date]="service.serviceDate" [status]="service.status"
+                        [price]="service.price" [id]="service.id">
+                    </app-service-cards>
+                    }
+                </div>
+                }
+            </div>
         </div>
-        }
     </div>
+    <app-uni-footer></app-uni-footer>
 </div>
