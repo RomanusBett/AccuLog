@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LucideAngularModule, Eye, EyeClosed } from 'lucide-angular';
 
 @Component({
@@ -15,7 +15,7 @@ export class FInputComponent {
   label = input<string>();
   placeholder = input<string>();
   type = input<string>();
-  fCName = input<any>();
+  fCName = input<FormControl<any>>();
 
   showPassword = false;
 

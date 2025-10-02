@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { input } from '@angular/core';
-import { CreateButtonComponent } from '../create-button/create-button.component';
 import { ProgressStatusComponent } from "../progress-status/progress-status.component";
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-progress-cards',
-  imports: [CreateButtonComponent, ProgressStatusComponent],
+  imports: [ButtonComponent, ProgressStatusComponent],
   templateUrl: './progress-cards.component.html',
   styles: ``
 })

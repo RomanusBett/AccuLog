@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LucideAngularModule, Check, CircleAlert } from 'lucide-angular';
+import { LucideAngularModule, CircleAlert, CircleCheckBig } from 'lucide-angular';
 import { input } from '@angular/core';
 import { ProgressStatusComponent } from '../progress-status/progress-status.component';
 
@@ -10,7 +10,7 @@ import { ProgressStatusComponent } from '../progress-status/progress-status.comp
   styles: ``
 })
 export class ServiceCardsComponent {
-  readonly Check = Check
+  readonly CircleCheckBig = CircleCheckBig
   readonly CircleAlert = CircleAlert
 
   type = input<string>();

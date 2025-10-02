@@ -37,6 +37,7 @@ def register():
         "user": {
             "id": new_user.id,
             "name": new_user.name,
-            "email": new_user.email
+            "email": new_user.email,
+            "is_admin":new_user.is_admin
         }
         }), 201

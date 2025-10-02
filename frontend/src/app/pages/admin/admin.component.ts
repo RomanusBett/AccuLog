@@ -1,4 +1,3 @@
-import { CreateButtonComponent } from './../../components/create-button/create-button.component';
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { InfoCardsComponent } from '../../components/info-cards/info-cards.component';
@@ -8,10 +7,12 @@ import { ProgressCardsComponent } from '../../components/progress-cards/progress
 import { SummaryCardsComponent } from '../../components/summary-cards/summary-cards.component';
 import { ServiceCardsComponent } from '../../components/service-cards/service-cards.component';
 import { AppDropdownComponent } from '../../components/app-dropdown/app-dropdown.component';
+import { ButtonComponent } from '../../components/button/button.component';
+import { UniFooterComponent } from '../../components/uni-footer/uni-footer.component';
 
 @Component({
   selector: 'app-admin',
-  imports: [NavbarComponent, AppDropdownComponent, InfoCardsComponent, MiniNavComponent, LucideAngularModule, ProgressCardsComponent, CreateButtonComponent, SummaryCardsComponent, ServiceCardsComponent],
+  imports: [NavbarComponent, AppDropdownComponent, InfoCardsComponent, MiniNavComponent, LucideAngularModule, ProgressCardsComponent, ButtonComponent, SummaryCardsComponent, ServiceCardsComponent, UniFooterComponent],
   templateUrl: './admin.component.html',
   styles: ``
 })
@@ -115,7 +116,7 @@ export class AdminComponent {
   addingCar = false;
 
   addCarToQueue() {
-    this.addingCar = true;
+    this.addingCar = !this.addingCar;
   }
 
   statesToBeToggled = ['Service Queue', 'Daily Overview', 'All Services'];

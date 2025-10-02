@@ -1,28 +1,44 @@
 <div class="flex flex-col text-sm mt-3">
-    <label class="mb-1">{{label()}}</label>
-    <div class="flex items-center justify-center w-[100%]"
-        [class.gap-2]="type()=== 'password' || type() === 'confirmPassword'" 
->
-        <input [type]="showPassword ? 'text': type()" class="bg-gray-200 text-gray-500 rounded-md p-1 pl-2 font-light"
-            [class.w-full]="type()!== 'password' && type() !== 'confirmPassword'"
-            [class.w-[90%]]="type()=== 'password' || type() === 'confirmPassword'" 
-            [placeholder]="placeholder()"
-            [formControl]="fCName()">
+  <label class="mb-1">{{ label() }}</label>
 
-        @if(type()==="password"|| type()==="confirmPassword"){
-        <button type="button" (click)="togglePassword()" class="relative text-gray-700">
-            @if(showPassword){
-            <div>
-                <lucide-angular [img]="Eye" class="w-5 h-5"></lucide-angular>
-            </div>
-            }
-            @else {
-            <div>
-                <lucide-angular [img]="EyeClosed" class="w-5 h-5"></lucide-angular>
-            </div>
-            }
-        </button>
+  <div class="flex items-center justify-center w-full"
+       [class.gap-0]="type() === 'password' || type() === 'confirmPassword'">
+
+    <input
+      [type]="showPassword ? 'text' : type()"
+      class="bg-gray-100 text-gray-600 p-1 pl-2 font-light w-full border border-gray-400"
+      [class.rounded]="type() !== 'password' && type() !== 'confirmPassword'"
+      [class.rounded-l]="type() === 'password' || type() === 'confirmPassword'"
+      [class.border-r-0]="type() === 'password' || type() === 'confirmPassword'"
+      [placeholder]="placeholder()"
+      [formControl]="fCName()!" />
+
+    @if (type() === 'password' || type() === 'confirmPassword') {
+      <button
+        type="button"
+        (click)="togglePassword()"
+        class="relative text-gray-700 bg-gray-100 p-1 rounded-r border border-l-0 border-gray-400">
+        
+        @if (showPassword) {
+          <lucide-angular [img]="Eye" class="w-5 h-5"></lucide-angular>
+        } @else {
+          <lucide-angular [img]="EyeClosed" class="w-5 h-5"></lucide-angular>
         }
-    </div>
+      </button>
+    }
+  </div>
 
+  @if(fCName()?.invalid && fCName()?.touched) {
+    <div class="text-red-500 text-xs mt-1">
+      @if(fCName()?.errors?.['required']) {
+        {{label()}} is required.
+      }
+      @if(fCName()?.errors?.['email']) {
+        Please enter a valid email.
+      }
+      @if(fCName()?.errors?.['minlength']) {
+        Minimum length not met.
+      }
+    </div>
+  }
 </div>

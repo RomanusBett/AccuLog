@@ -5,11 +5,13 @@ import { MiniNavComponent } from '../../components/mini-nav/mini-nav.component';
 import { VehicleCardsComponent } from '../../components/vehicle-cards/vehicle-cards.component';
 import { ServiceCardsComponent } from '../../components/service-cards/service-cards.component';
 import { Car, DollarSign, Calendar } from 'lucide-angular';
-import { CreateButtonComponent } from '../../components/create-button/create-button.component';
+import { ButtonComponent } from '../../components/button/button.component';
+import { FormInputComponent } from '../../components/form-input/form-input.component';
+import { UniFooterComponent } from '../../components/uni-footer/uni-footer.component';
 
 @Component({
   selector: 'app-client-p',
-  imports: [NavbarComponent, InfoCardsComponent, MiniNavComponent, VehicleCardsComponent, ServiceCardsComponent, CreateButtonComponent],
+  imports: [NavbarComponent, InfoCardsComponent, MiniNavComponent, VehicleCardsComponent, ServiceCardsComponent, ButtonComponent, FormInputComponent, UniFooterComponent],
   templateUrl: './client-p.component.html',
   styles: ``
 })
@@ -85,6 +87,12 @@ export class ClientPComponent {
       price: 4000,
     }
   ]
+
+  addingCar = false;
+
+  addCar(){
+    this.addingCar = !this.addingCar;
+  }
 
   state = 'My Cars';
 
