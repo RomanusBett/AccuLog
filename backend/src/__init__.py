@@ -9,7 +9,8 @@ app.config.from_object(config('APP_SETTINGS'))
 db.init_app(app)
 bcrypt.init_app(app)
 migrate.init_app(app, db)
-CORS(app, origins=['http://localhost:4200'], supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:4200"]}}, supports_credentials=True)
+
 jwt = JWTManager(app)
 
 login_manager = LoginManager()
@@ -22,7 +23,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-from src.views.services.register import register_bp
+from src.views.users.register import register_bp
 from src.views.users.loginUser import login_bp
 from src.views.users.updateUser import update_user_bp
 from src.views.users.logout import logout_bp

@@ -1,30 +1,35 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required, current_user
 from src.views.responses import missing_fields, added_car, car_not_found, car_updated
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from src.views.models import Cars
 from src.extensions import db
 
 addCar_bp = Blueprint('add-car', __name__)
 
-@login_required
+
 @addCar_bp.route('/add-vehicle', methods=['POST'])
+@jwt_required()
 def add_car():
-    car_to_add = request.get_json()
+    new_car = request.get_json()
+    required_fields = ['license', 'colour', 'year', 'model']
     
-    if not car_to_add:
+    if not new_car or not all(field in new_car for field in required_fields):
         return jsonify(missing_fields), 400
     
-    license_plate = car_to_add['license']
+    license_plate = new_car['license']
+    colour = new_car['colour']
+    prod_year = new_car['year']
+    model = new_car['model']
     
-    car = Cars(license_plate=license_plate)
-    car.owner = current_user
+    car = Cars(license_plate=license_plate, colour=colour, prod_year=prod_year, model=model, car_owner=get_jwt_identity())
     db.session.add(car)
     db.session.commit()
     
     return jsonify(added_car), 201
     
-@login_required
+
 @addCar_bp.route('/update-vehicle/<int:vehicle_id>', methods=['PUT'])
+@jwt_required()
 def update_car(vehicle_id):
     data = request.get_json()
     if not data:

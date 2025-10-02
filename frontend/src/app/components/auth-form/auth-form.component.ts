@@ -23,13 +23,18 @@ export class AuthFormComponent {
 
   formSubmit = output<any>();
 
-  thisSubmit() {
-    console.log("hello");
+thisSubmit() {
+  const form = this.form();
 
-    const form = this.form();
+  if (!form) return;
 
-    if (form && form.valid) {
-      this.formSubmit.emit(form.value);
-    }
+  if (form.invalid) {
+    Object.values(form.controls).forEach(control => {
+      control.markAsTouched();
+    });
+    return; 
   }
+
+  this.formSubmit.emit(form.value);
+}
 }

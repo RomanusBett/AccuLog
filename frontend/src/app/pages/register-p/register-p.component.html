@@ -1,21 +1,18 @@
-<app-auth-form
-    title="Sign Up"
-    subtitle="Enter your credentials to sign up"
-    btnText="Sign Up"
-    linkText="Already have an account? "
-    linkUrl="/login"
-    linkActionTxt="Login"
-    [form]="profileForm"
-    (formSubmit)="handleSubmit($event)"
->   
+<app-auth-form title="Sign Up" subtitle="Enter your credentials to sign up" btnText="Sign Up"
+    linkText="Already have an account? " linkUrl="/login" linkActionTxt="Login" [form]="profileForm"
+    (formSubmit)="handleSubmit($event)">
     @if(errorMessage){
-        <div class="text-red-500 text-sm mt-1">
-            {{errorMessage}}
-        </div>
+    <div class="text-red-500 text-sm mt-1">
+        {{errorMessage}}
+    </div>
     }
+    <app-f-input type="text" label="Name" [fCName]="profileForm.controls.name"
+        placeholder="Enter your name"></app-f-input>
+    <app-f-input type="email" label="Email" [fCName]="profileForm.controls.email"
+        placeholder="Enter your email"></app-f-input>
+    <app-f-input type="password" label="Password" [fCName]="profileForm.controls.password"
+        placeholder="Enter your password"></app-f-input>
+    <app-f-input type="password" label="Confirm Password" [fCName]="profileForm.controls.confirmPassword"
+        placeholder="Confirm your password"></app-f-input>
 
-    <app-f-input type="text" label="name" [fCName]="profileForm.get('name')" placeholder="Enter your name"></app-f-input>
-    <app-f-input type="email" label="Email" [fCName]="profileForm.get('email')" placeholder="Enter your email"></app-f-input>
-    <app-f-input type="password" label="Password" [fCName]="profileForm.get('password')" placeholder="Enter your password"></app-f-input>
-    <app-f-input type="password" label="confirm_password" [fCName]="profileForm.get('confirmPassword')"  placeholder="Confirm your password"></app-f-input>
 </app-auth-form>
