@@ -21,6 +21,10 @@ def add_car():
     prod_year = new_car['year']
     model = new_car['model']
     
+    existing_car = Cars.query.filter(Cars.license_plate==license_plate).first()
+    if existing_car:
+        return jsonify("Vehicle alredy exists"), 400
+    
     car = Cars(license_plate=license_plate, colour=colour, prod_year=prod_year, model=model, car_owner=get_jwt_identity())
     db.session.add(car)
     db.session.commit()
@@ -51,3 +55,26 @@ def update_car(vehicle_id):
         return jsonify({'error': str(e)}), 400
     
     return jsonify(car_updated), 200
+
+
+@addCar_bp.route('/get-cars', methods=['GET'])
+@jwt_required()
+def get_my_vehicles():
+    user_id = get_jwt_identity()
+    cars = Cars.query.filter_by(car_owner = user_id).all()
+    
+    if not cars:
+        return jsonify({"message": "No cars found for this user"}), 404
+    
+    cars_list = [
+        {
+            "id": car.id,
+            "license_plate": car.license_plate,
+            "colour": car.colour,
+            "prod_year": car.prod_year,
+            "model":car.model
+        }
+        for car in cars
+    ]
+    
+    return jsonify(cars_list), 200

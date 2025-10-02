@@ -1,14 +1,13 @@
-<app-auth-form
-    title="Sign In"
-    subtitle="Enter your credentials to sign in"
-    btnText="Sign In"
-    linkText="Don't have an account? "
-    linkUrl="/register"
-    linkActionTxt="Register"
-    (formSubmit)="handleSubmit($event)"
-    [form]="profileForm"
-
->
-    <app-f-input type="email" label="Email" placeholder="Enter your email" [fCName]="profileForm.get('email')" ></app-f-input>
-    <app-f-input type="password" label="Password" placeholder="Enter your password" [fCName]="profileForm.get('password')"></app-f-input>
+<app-auth-form title="Sign In" subtitle="Enter your credentials to sign in" btnText="Sign In"
+    linkText="Don't have an account? " linkUrl="/register" linkActionTxt="Register" (formSubmit)="handleSubmit($event)"
+    [form]="profileForm">
+    @if(errorMessage){
+    <div class="text-red-500 text-sm mt-1">
+        {{errorMessage}}
+    </div>
+    }
+    <app-f-input type="email" label="Email" placeholder="Enter your email"
+        [fCName]="profileForm.controls.email"></app-f-input>
+    <app-f-input type="password" label="Password" placeholder="Enter your password"
+        [fCName]="profileForm.controls.password"></app-f-input>
 </app-auth-form>

@@ -1,3 +1,4 @@
+import { NavigationHelperService } from './../../core/services/navigation-helper.service';
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { InfoCardsComponent } from '../../components/info-cards/info-cards.component';
@@ -8,18 +9,52 @@ import { Car, DollarSign, Calendar } from 'lucide-angular';
 import { ButtonComponent } from '../../components/button/button.component';
 import { FormInputComponent } from '../../components/form-input/form-input.component';
 import { UniFooterComponent } from '../../components/uni-footer/uni-footer.component';
+import { FormGroup, FormControl, ɵInternalFormsSharedModule } from '@angular/forms';
+import { Validators, ReactiveFormsModule } from '@angular/forms';
+import { ApiService } from '../../core/services/api.service';
 
+
+interface User {
+  email:string,
+  id:number,
+  is_admin:boolean,
+  name:string,
+}
 @Component({
   selector: 'app-client-p',
-  imports: [NavbarComponent, InfoCardsComponent, MiniNavComponent, VehicleCardsComponent, ServiceCardsComponent, ButtonComponent, FormInputComponent, UniFooterComponent],
+  imports: [ReactiveFormsModule, NavbarComponent, InfoCardsComponent, MiniNavComponent, VehicleCardsComponent, ServiceCardsComponent, ButtonComponent, FormInputComponent, UniFooterComponent, ɵInternalFormsSharedModule],
   templateUrl: './client-p.component.html',
   styles: ``
 })
 export class ClientPComponent {
+  
+
+  constructor(private apiService:ApiService, private navigationService:NavigationHelperService){ }
+
+  ngOnInit():void{
+    this.fetchVehicles();
+    const storedUser = localStorage.getItem('user');
+    let user: User |null = null;
+    let role: 'admin'| 'client' = 'client';
+    if (storedUser){
+      user = JSON.parse(storedUser);
+    }
+    if(user?.is_admin === true){
+      role = 'admin'
+    }else {
+      role = 'client'
+    }
+    this.navigationService.setRole(role);
+  }
+  
+  statesToBeToggled = ['My Cars', 'Service History'];
+
+  carCards:any[] = [];
+
   infoCards = [
     {
       cardTitle: "My cars",
-      cardFigures: 2,
+      cardFigures: 0,
       cardLabels:"Registered Vehicles",
       cardIcon: Car,
     },
@@ -34,34 +69,6 @@ export class ClientPComponent {
       cardFigures: 1500,
       cardLabels:"Completed Services",
       cardIcon: DollarSign,
-    }
-  ]
-  statesToBeToggled = ['My Cars', 'Service History'];
-
-  carCards = [
-    {
-      id:1,
-      carType: "Toyota Camry", 
-      year: "2020",
-      colour: "Silver",
-      License: "KAA001",
-      services: 1,
-    },
-    {
-      id:2,
-      carType: "Subaru Impreza", 
-      year: "2000",
-      colour: "Black",
-      License: "KBA001",
-      services: 2,
-    },
-    {
-      id:3,
-      carType: "Porshe Cayenne", 
-      year: "2014",
-      colour: "Green",
-      License: "KCA001X",
-      services: 1,
     }
   ]
 
@@ -88,9 +95,60 @@ export class ClientPComponent {
     }
   ]
 
+  carForm = new FormGroup({
+    model: new FormControl<string>('', {nonNullable:true, validators:[Validators.required]}),
+    colour: new FormControl<string>('', {nonNullable:true, validators:[Validators.required]}),
+    year: new FormControl<string>('', {nonNullable:false}),
+    license: new FormControl<string>('', {nonNullable:true, validators:[Validators.required]})
+  })
+  errorMessage = "";
+  successMessage = "";
+  carFetchError="";
+
+  fetchVehicles(){
+    this.apiService.getVehicles().subscribe({
+      next: (cars)=>{
+        this.carCards = cars;
+        this.infoCards[0].cardFigures = this.carCards.length;        
+      },
+      error: (err)=>{
+        console.error(err);
+        this.carFetchError='Unable to load your vehicles';
+      }
+    })
+  }
+
+  handleCarSubmit(){
+    this.errorMessage='';
+    this.successMessage='';
+    console.log(this.carForm.value);
+    
+    if(!this.carForm.valid){
+      this.errorMessage = 'Please fill in the required fields';
+      return;
+    }
+    this.apiService.addVehicle(this.carForm.value as {
+      model:string;
+      colour:string;
+      year: string;
+      license: string;
+    }).subscribe({
+      next: (response)=>{
+        this.successMessage = 'Car Added successfully.';
+        this.carForm.reset();
+      },
+      error: (err)=>{
+        console.error('API error', err);
+        this.errorMessage = err?.error || 'Something went wrong.';
+      }
+    })
+    
+  }
+
   addingCar = false;
 
-  addCar(){
+
+  addCarClicked(){
     this.addingCar = !this.addingCar;
   }
 

@@ -27,7 +27,7 @@ export class RoleGuard implements CanActivate{
       const user = JSON.parse(storedUser);
       if(user.is_admin===true) return true;
     }
-    this.router.navigate(['/home'])
+    this.router.navigate(['/client/dashboard'])
     return false;
   }
 }

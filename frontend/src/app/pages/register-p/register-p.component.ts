@@ -51,12 +51,12 @@ export class RegisterPComponent {
         if (response.user.is_admin) {
           this.router.navigate(['/site-admin']);
         } else {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/client/dashboard']);
         }
       },
       error: (error) => {
         console.error("registration failed", error);
-        this.errorMessage = error?.error?.message || "Registration failed, please try again.";
+        this.errorMessage = error?.error || "Registration failed, please try again.";
       }
     });
   }

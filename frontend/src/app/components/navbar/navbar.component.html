@@ -8,12 +8,12 @@
             @if(user){
                 <p class="capitalize">Welcome, {{user.name}}</p>
             }
-            
-            <button (click)="logoutUser()" class="flex items-center border-2 rounded p-1 border-gray-200 gap-2 hover:cursor-pointer">
+            <button (click)="logoutUser()" class="flex items-center border-2 rounded-[10px] p-1 border-gray-200 gap-2 hover:cursor-pointer hover:bg-gray-100">
                 <lucide-angular class="w-4 h-4" [img]="LogIn">
                 </lucide-angular>
                 Logout
             </button>
+            <app-nav-sidebar></app-nav-sidebar>
         </div>
     </div>
 </div>
