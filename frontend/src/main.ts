@@ -22,8 +22,8 @@ export const routes: Routes = [
 
   },
   {
-    path: 'home',
-    title: 'App Home Page',
+    path: 'client/dashboard',
+    title: 'Dashboard',
     component: ClientPComponent,
     canActivate: [AuthGuardService],
   },

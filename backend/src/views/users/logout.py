@@ -7,7 +7,7 @@ logout_bp = Blueprint('logout', __name__)
 token_blacklist = set()
 
 @logout_bp.route('/logout', methods=['POST'])
-@jwt_required
+@jwt_required()
 def logout():
     jti = get_jwt()["jti"]
     

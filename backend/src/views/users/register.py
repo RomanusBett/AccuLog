@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from src.views.models import User
 from src import db, bcrypt
 from flask_login import login_user
-from src.views.responses import success_register, missing_fields, user_exists
+from src.views.responses import missing_fields, user_exists
 from flask_jwt_extended import create_access_token
 
 register_bp = Blueprint('register', __name__)
@@ -28,7 +28,7 @@ def register():
     db.session.commit()
     
     access_token = create_access_token(
-        identity=new_user.id
+        identity=str(new_user.id)
     )
     
     return jsonify({

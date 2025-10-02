@@ -1,4 +1,11 @@
 <div class="flex gap-2 flex-col">
-    <label>{{formLabel()}}</label>
-    <input class="text-xs text-gray-600 bg-gray-200 rounded p-2 w-full" type="text" [placeholder]="holder()">
+    <label class="flex">{{formLabel()}} @if(formLabel()!=='Year'){<p class="text-red-600">*</p>}</label>
+    @if(fcName()?.invalid && fcName()?.touched){
+        <div class="text-red-500 text-xs mtb-1">
+            @if(fcName()?.errors?.['required']){
+                {{formLabel()}} is required.
+            }
+        </div>
+    }
+    <input [formControl]="fcName()!"class="text-xs text-gray-600 bg-gray-200 rounded p-2 w-full" type="text" [placeholder]="holder()">
 </div>

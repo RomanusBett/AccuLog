@@ -30,8 +30,9 @@ class Cars(db.Model):
     car_owner = db.Column(db.Integer, db.ForeignKey('user.id'))
     payments = db.relationship('Payments', backref='car', lazy=True)
     
-    def __init__(self, license_plate):
-        self.license_plate = license_plate
+    def __repr__(self):
+        return f"<Car {self.license_plate}>"
+        
     
     
 service_payments = db.Table(

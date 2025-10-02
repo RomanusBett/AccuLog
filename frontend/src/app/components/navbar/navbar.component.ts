@@ -1,14 +1,18 @@
+import { ApiService } from './../../core/services/api.service';
 import { LucideAngularModule, LogIn } from 'lucide-angular';
 import { Component } from '@angular/core';
+import { NavSidebarComponent } from '../nav-sidebar/nav-sidebar.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, NavSidebarComponent],
   templateUrl: './navbar.component.html',
   styles: ``
 })
 export class NavbarComponent {
   readonly LogIn = LogIn;
+
+  constructor(private apiService:ApiService){ }
 
   user: any = null;
 
@@ -20,6 +24,16 @@ export class NavbarComponent {
   }
 
   logoutUser(){
-    window.location.href = '/login';
+    this.apiService.logoutUser().subscribe({
+      next: response=>{
+        console.log(response);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+      },
+      error: err=>{
+        console.error(err)
+      }
+    })
   }
 }
