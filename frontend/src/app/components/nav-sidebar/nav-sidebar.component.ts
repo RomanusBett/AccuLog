@@ -12,6 +12,10 @@ export class NavSidebarComponent {
   readonly Menu = Menu;
   readonly X = X;
 
+  ngOnInit():void{
+    this.navigationService.initRoleFromStorage();
+  }
+
   navItems: NavItem[] = [];
   
   constructor(private navigationService: NavigationHelperService){ 

@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div class="bg-gray-50 min-h-screen flex flex-col items-center">
+    <div class="w-[80%] flex justify-center pt-2 pb-2 bg-gray-50 flex-col">
+        <div class="mt-5 flex justify-between">
+            <div>
+                <h2 class="capitalize text-blue-900 font-bold">All Services</h2>
+                <p class="text-gray-600 text-sm">Complete service history</p>
+            </div>
+        </div>
+        <div class="mt-5">
+            @for(service of queuedCars; track service.id){
+            <app-service-cards [type]="service.type" [car]="service.carModel" [year]="service.year"
+                [license]="service.plate" [date]="service.serviceDate" [status]="service.status"
+                [price]="service.dueAmount" [id]="service.id">
+            </app-service-cards>
+            }
+        </div>
+
+    </div>
+</div>
+<app-uni-footer></app-uni-footer>

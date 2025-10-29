@@ -21,6 +21,10 @@ export class AdminComponent {
   readonly TrendingUp = TrendingUp;
   readonly UsersRound = UsersRound;
 
+  ngOnInit():void{
+    
+  }
+
   adminCards = [
     {
       cardTitle: "Total Revenue",

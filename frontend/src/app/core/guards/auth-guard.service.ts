@@ -18,6 +18,9 @@ export class AuthGuardService implements CanActivate {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
 export class RoleGuard implements CanActivate{
   constructor(private router: Router){ }
   
@@ -25,7 +28,8 @@ export class RoleGuard implements CanActivate{
     const storedUser = localStorage.getItem('user');
     if(storedUser){
       const user = JSON.parse(storedUser);
-      if(user.is_admin===true) return true;
+      if(user.is_admin===true) 
+        return true;
     }
     this.router.navigate(['/client/dashboard'])
     return false;
