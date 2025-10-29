@@ -8,6 +8,11 @@ import { ClientPComponent } from './app/pages/client-p/client-p.component';
 import { AdminComponent } from './app/pages/admin/admin.component';
 import { CreateServiceComponent } from './app/pages/create-service/create-service.component';
 import { AuthGuardService, RoleGuard } from './app/core/guards/auth-guard.service';
+import { ClientBookingsComponent } from './app/pages/client-bookings/client-bookings.component';
+import { ClientProfileComponent } from './app/pages/client-profile/client-profile.component';
+import { AdminOverviewComponent } from './app/pages/admin-overview/admin-overview.component';
+import { ServiceHistoryComponent } from './app/pages/service-history/service-history.component';
+import { WashServicesComponent } from './app/pages/wash-services/wash-services.component';
 
 export const routes: Routes = [
   {
@@ -28,7 +33,13 @@ export const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path:'site-admin',
+    path: 'client/book-service',
+    title: 'Book a Service',
+    component: ClientBookingsComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path:'admin/dashboard',
     title: 'Admin Page',
     component: AdminComponent,
     canActivate: [AuthGuardService, RoleGuard],
@@ -38,6 +49,30 @@ export const routes: Routes = [
     title:'Create Service',
     component: CreateServiceComponent,
     canActivate: [AuthGuardService, RoleGuard],
+  },
+  {
+    path:'admin/daily-overview',
+    title:'Daily Overview',
+    component: AdminOverviewComponent,
+    canActivate: [AuthGuardService, RoleGuard],
+  },
+  {
+    path:'admin/wash-history',
+    title:'Service History',
+    component: ServiceHistoryComponent,
+    canActivate: [AuthGuardService, RoleGuard],
+  },
+  {
+    path:'admin/service-management',
+    title:'Manage Services',
+    component: WashServicesComponent,
+    canActivate: [AuthGuardService, RoleGuard],
+  },
+  {
+    path:'client/profile',
+    title:'Profile',
+    component: ClientProfileComponent,
+    canActivate: [AuthGuardService],
   },
   {
     path: '**', redirectTo: 'login'

@@ -49,7 +49,7 @@ export class RegisterPComponent {
         localStorage.setItem('token', response.access_token);
         localStorage.setItem('user', JSON.stringify(response.user));
         if (response.user.is_admin) {
-          this.router.navigate(['/site-admin']);
+          this.router.navigate(['/admin/dashboard']);
         } else {
           this.router.navigate(['/client/dashboard']);
         }

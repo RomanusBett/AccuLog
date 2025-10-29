@@ -1,4 +1,3 @@
-import { NavigationHelperService } from './../../core/services/navigation-helper.service';
 import { Component } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { InfoCardsComponent } from '../../components/info-cards/info-cards.component';
@@ -14,12 +13,7 @@ import { Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../core/services/api.service';
 
 
-interface User {
-  email:string,
-  id:number,
-  is_admin:boolean,
-  name:string,
-}
+
 @Component({
   selector: 'app-client-p',
   imports: [ReactiveFormsModule, NavbarComponent, InfoCardsComponent, MiniNavComponent, VehicleCardsComponent, ServiceCardsComponent, ButtonComponent, FormInputComponent, UniFooterComponent, ɵInternalFormsSharedModule],
@@ -28,23 +22,10 @@ interface User {
 })
 export class ClientPComponent {
   
-
-  constructor(private apiService:ApiService, private navigationService:NavigationHelperService){ }
+  constructor(private apiService:ApiService){ }
 
   ngOnInit():void{
     this.fetchVehicles();
-    const storedUser = localStorage.getItem('user');
-    let user: User |null = null;
-    let role: 'admin'| 'client' = 'client';
-    if (storedUser){
-      user = JSON.parse(storedUser);
-    }
-    if(user?.is_admin === true){
-      role = 'admin'
-    }else {
-      role = 'client'
-    }
-    this.navigationService.setRole(role);
   }
   
   statesToBeToggled = ['My Cars', 'Service History'];
